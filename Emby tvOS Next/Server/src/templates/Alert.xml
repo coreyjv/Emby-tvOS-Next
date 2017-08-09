@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <alertTemplate>
+        <title>{{formatMessage (intlGet title)}}</title>
+        {{#if description}}
+        <description>{{formatMessage (intlGet description)}}</description>
+        {{/if}}
+        {{#if buttons}}
+        {{#each buttons}}
+            <button id="{{this.id}}">
+                {{#if this.formatText}}
+                <text>{{formatMessage (intlGet this.text)}}</text>
+                {{else}}
+                <text>{{this.text}}</text>
+                {{/if}}
+            </button>
+        {{/each}}
+        {{/if}}
+    </alertTemplate>
+</document>

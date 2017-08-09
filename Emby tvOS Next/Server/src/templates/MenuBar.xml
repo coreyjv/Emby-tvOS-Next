@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2016 Apple Inc. All Rights Reserved.
+See LICENSE.txt for this sample’s licensing information
+-->
+<document>
+  <menuBarTemplate>
+    <menuBar>
+    {{#each menuItems}}
+      <menuItem route="{{this.route}}" autoHighlight="{{this.autoHighlight}}">
+        <title>{{formatMessage (intlGet this.title)}}</title>
+      </menuItem>
+    {{/each}}
+    </menuBar>
+  </menuBarTemplate>
+</document>

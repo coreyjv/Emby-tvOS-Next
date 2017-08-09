@@ -1,0 +1,25 @@
+{
+    "extends": "eslint:recommended",
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "parser": "babel-eslint",
+    "env": {
+        "node": true
+    },
+    "globals": {
+        "navigationDocument": true,
+        "DOMParser": true,
+        "App": true,
+        "Promise": true,
+        "evaluateScripts": true,
+        "Settings": true,
+        "DataItem": true,
+        "Set": true
+    },
+    "rules": {
+        "no-console": "off",
+        "indent": ["error", "tab", { "SwitchCase": 1 }]
+    }
+}

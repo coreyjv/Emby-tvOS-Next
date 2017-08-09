@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <document>
+            <descriptiveAlertTemplate>
+                {{#if title}}
+                <title>{{formatMessage (intlGet title)}}</title>
+                {{/if}}
+                {{#if intlDescription}}
+                <description showsScrollIndicator="true">{{formatMessage (intlGet description)}}</description>
+                {{else}}
+                <description showsScrollIndicator="true">{{description}}</description>
+                {{/if}}
+            </descriptiveAlertTemplate>
+        </document>

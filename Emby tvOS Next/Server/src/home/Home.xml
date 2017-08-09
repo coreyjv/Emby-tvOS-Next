@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+	<head>
+		<style>{{> styles}}</style>
+	</head>
+	<stackTemplate>
+		<prototypes>
+			{{> libraryPrototype}}
+			{{> moviePrototype showProgress=true playedCheckmarkClass="played-checkmark"}}
+			{{> episodePrototype}}
+			{{> videoPrototype}}
+		</prototypes>
+		<collectionList>
+			<shelf>
+				<header>
+					<title id="libraryTitle" binding="textContent:{title};"/>
+				</header>
+				<section id="libraries" binding="items:{libraries};" />
+			</shelf>
+			<shelf>
+				<header>
+					<title id="continueWatchingTitle" binding="textContent:{title};"/>
+				</header>
+				<section id="continueWatchingItems" binding="items:{continueWatchingItems};" />
+			</shelf>
+		</collectionList>
+	</stackTemplate>
+</document>

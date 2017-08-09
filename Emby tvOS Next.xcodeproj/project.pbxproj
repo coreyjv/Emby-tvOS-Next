@@ -14,7 +14,6 @@
 /* Begin PBXFileReference section */
 		04233A771F3A8A5C003A2324 /* Emby tvOS Next.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Emby tvOS Next.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04233A7A1F3A8A5C003A2324 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		04233A7C1F3A8A5C003A2324 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
 		04233A7D1F3A8A5C003A2324 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04233A7F1F3A8A5C003A2324 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,12 +48,19 @@
 		04233A791F3A8A5C003A2324 /* Emby tvOS Next */ = {
 			isa = PBXGroup;
 			children = (
+				04233A851F3A8AB1003A2324 /* Server */,
 				04233A7A1F3A8A5C003A2324 /* AppDelegate.swift */,
-				04233A7C1F3A8A5C003A2324 /* application.js */,
 				04233A7D1F3A8A5C003A2324 /* Assets.xcassets */,
 				04233A7F1F3A8A5C003A2324 /* Info.plist */,
 			);
 			path = "Emby tvOS Next";
+			sourceTree = "<group>";
+		};
+		04233A851F3A8AB1003A2324 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

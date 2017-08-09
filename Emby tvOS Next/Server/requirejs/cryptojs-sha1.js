@@ -1,0 +1,1 @@
+define("cryptojs-sha1",["cryptojslib/components/sha1-min"],function(){});

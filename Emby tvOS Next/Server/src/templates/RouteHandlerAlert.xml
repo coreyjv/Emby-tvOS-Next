@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+    <descriptiveAlertTemplate>
+        <title>{{formatMessage (intlGet "messages.errors.unableToFindRoute")}}</title>
+        <description showsScrollIndicator="true">
+            {{formatMessage (intlGet "messages.errors.unableToFindRouteDescription")}}
+            Route: {{route}}
+            Route Params: {{routeParams}}
+        </description>
+    </descriptiveAlertTemplate>
+</document>
