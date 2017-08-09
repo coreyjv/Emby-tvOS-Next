@@ -1,9 +1,9 @@
 import {apiClient, ApiClient} from './ApiClient';
 
 /// TEMPORARY
-const server = "http://emby:8096";
-const apiKey = "830ca1260b294dcfa03f09235d97a7c4";
-const currentUserId = "fef1c74c6aa148c499648b7a208cfc2f";
+const server = "";
+const apiKey = "";
+const currentUserId = "";
 new ApiClient(server, apiKey, currentUserId);
 ///  TEMPORARY
 
