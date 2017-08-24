@@ -10,7 +10,7 @@
 				<collectionList>
 						<grid>
 								<prototypes>
-                  {{> moviePrototype playedCheckmarkClass="played-checkmark"}}
+								{{> moviePrototype}}
 								</prototypes>
 								<section binding="items:{movies};" />
 						</grid>

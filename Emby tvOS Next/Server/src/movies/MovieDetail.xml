@@ -7,13 +7,13 @@
 		<prototypes>
 			{{> personPrototype}}
 			{{> scenePrototype}}
-			{{> moviePrototype playedCheckmarkClass="played-checkmark2"}}
+			{{> moviePrototype}}
 		</prototypes>
 		<background>
 			<!-- Cannot use binding for this -->
 			<img src="{{movieDataItem.backgroundImgUrl}}" width="1280" height="720"/>
 		</background>
-		<banner style="background-color: rgba(0, 0, 0, 0.7)">
+		<banner class="banner-overlay">
 			<infoList>
 				{{#each movieDataItem.infoList}}
 				<info>
@@ -40,34 +40,10 @@
 				</row>
 				<description id="description" binding="textContent:{description}" handlesOverflow="true" />
 				<row>
-					{{#if movieDataItem.canPlay}}
-					<buttonLockup>
-						<badge src="resource://button-play" />
-						<title>{{formatMessage (intlGet "messages.play")}}</title>
-					</buttonLockup>
-					{{/if}}
-					<buttonLockup>
-						{{#if movieDataItem.isFavorite}}
-						<badge src="resource://button-rated" class="red" />
-						{{else}}
-						<badge src="resource://button-rated" />
-						{{/if}}
-						<title>{{formatMessage (intlGet "messages.favorite")}}</title>
-					</buttonLockup>
-					<buttonLockup>
-						{{#if movieDataItem.hasWatched}}
-						<badge src="resource://button-checkmark" class="red"/>
-						{{else}}
-						<badge src="resource://button-checkmark" />
-						{{/if}}
-						<title>{{formatMessage (intlGet "messages.watched")}}</title>
-					</buttonLockup>
-					{{#if movieDataItem.canDelete}}
-					<buttonLockup>
-						<badge src="resource://button-remove" />
-						<title>{{formatMessage (intlGet "messages.delete")}}</title>
-					</buttonLockup>
-					{{/if}}
+					{{> playButton canPlay=movieDataItem.canPlay}}
+					{{> favoriteButton isFavorite=movieDataItem.isFavorite}}
+					{{> watchedButton hasWatched=movieDataItem.hasWatched}}
+					{{> deleteButton canDelete=movieDataItem.canDelete}}
 				</row>
 			</stack>
 			<heroImg id="heroImg" binding="@src:{heroImgUrl}"/>

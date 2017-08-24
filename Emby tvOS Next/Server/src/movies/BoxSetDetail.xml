@@ -1,0 +1,70 @@
+<document>
+	<head>
+		<style>{{> styles}}</style>
+	</head>
+	 <productBundleTemplate>
+	 	<background>
+			<!-- Cannot use binding for this -->
+			<img src="{{boxSetDataItem.backgroundImgUrl}}" width="1280" height="720"/>
+		</background>
+		<banner class="banner-overlay">
+			<stack>
+				<title id="title" binding="textContent:{title}" />
+				<row>
+					<text>{{formatMessage (intlGet "messages.items") itemCount=boxSetDataItem.childrenCount}}</text>
+					<badge id="ratingBadge" binding="@src:{ratingBadgeUrl};" class="white" />
+				</row>
+				<description id="description" binding="textContent:{description}" handlesOverflow="true" />
+				<row>
+					{{> playButton canPlay=boxSetDataItem.canPlay}}
+					{{> shuffleButton canShuffle=boxSetDataItem.canPlay}}
+					{{> favoriteButton isFavorite=boxSetDataItem.isFavorite}}
+					{{> watchedButton hasWatched=boxSetDataItem.hasWatched}}
+					{{> deleteButton canDelete=boxSetDataItem.canDelete}}
+				</row>
+			</stack>
+			<heroImg id="heroImg" binding="@src:{heroImgUrl}"/>
+		</banner>
+		<shelf>
+			<header>
+				<title id="boxSetChildrenTitle" binding="textContent:{title};"/>
+			</header>
+			<section>
+				<!-- Cannot use binding here because binding does not support a <relatedContent /> element in a lockup-->
+				{{#each boxSetChildrenShelf.boxSetChildrenDataItems}}
+				<lockup route="{{route}}" routeParams="{{routeParams}}">
+					<img src="{{url}}" class="rounded-img" width="193" height="290" style="tv-placeholder: movie" contentMode="aspect-fill"/>
+					<title style="font-size: 28" class="show-text-on-highlight">{{title}}</title>
+					<overlay class="progress-overlay">
+						<badge src="{{playedUrl}}" class="played-checkmark" accessibility="Watched" />
+					</overlay>
+					<relatedContent>
+						<infoTable>
+							<header>
+								<title>{{title}}</title>
+							</header>
+							<info>
+								<header></header>
+								<row>
+									{{#if criticRating}}
+									<text><badge src="{{criticBadgeUrl}}"/> {{criticRating}}%</text>
+									{{/if}}
+									<text>{{runtime}}</text>
+									<text>{{genres}}</text>
+									<badge src="{{ratingBadgeUrl}}" class="white" />
+									<badge src="{{hdBadgeUrl}}" class="white" />
+									<badge src="{{subtitlesBadgeUrl}}" class="white" />
+								</row>
+							</info>
+							<info>
+								<header></header>
+								<description handlesOverflow="true">{{description}}</description>
+							</info>
+						</infoTable>
+					</relatedContent>
+				</lockup>
+				{{/each}}
+			</section>
+		</shelf>
+	 </productBundleTemplate>
+</document>

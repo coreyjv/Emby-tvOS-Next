@@ -6,7 +6,7 @@
 	<stackTemplate>
 		<prototypes>
 			{{> libraryPrototype}}
-			{{> moviePrototype showProgress=true playedCheckmarkClass="played-checkmark"}}
+			{{> moviePrototype showProgress=true}}
 			{{> episodePrototype}}
 			{{> videoPrototype}}
 		</prototypes>

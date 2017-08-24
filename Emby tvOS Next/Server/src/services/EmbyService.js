@@ -1,9 +1,9 @@
 import {apiClient, ApiClient} from './ApiClient';
 
 /// TEMPORARY
-const server = "";
-const apiKey = "";
-const currentUserId = "";
+const server = "http://emby:8096";
+const apiKey = "830ca1260b294dcfa03f09235d97a7c4";
+const currentUserId = "fef1c74c6aa148c499648b7a208cfc2f";
 new ApiClient(server, apiKey, currentUserId);
 ///  TEMPORARY
 
@@ -151,6 +151,32 @@ async function getMovies(movieLibraryId, startIndex, pageSize) {
 	return movies.Items;
 }
 
+async function getBoxSetChildren(boxSetId) {
+	console.log("Attempting to retrieve boxset children with boxset id", boxSetId);
+
+	const boxSetChildren = await apiClient.getItems(currentUserId, {
+		parentId: boxSetId,
+		fields: "PrimaryImageAspectRatio,CanDelete,Overview,Genres"
+	});
+
+	console.log("Retrieved boxset children", boxSetChildren);
+
+	return boxSetChildren.Items;
+}
+
+async function getBoxSetDetailWithChildren(boxSetId) {
+	console.log("Attempting to retrieve boxset and children for boxset with id", boxSetId);
+	
+	const boxSetDetailWithItems = await Promise.all([getItem(boxSetId), getBoxSetChildren(boxSetId)]);
+
+	console.log("Retrieved boxset detail and children", boxSetDetailWithItems);
+
+	return {
+		boxSetDetail: boxSetDetailWithItems[0],
+		boxSetChildren: boxSetDetailWithItems[1]
+	};
+}
+
 function getLatestMediaLibraries(latestItemsExcludes, libraries) {
 	const librariesSet = new Set(libraries);
 
@@ -180,6 +206,10 @@ class EmbyService {
 				.then(values => {
 					return { movie: values[0].movie, similarMovies: values[0].similarMovies, specialFeatures: values[1] }; 
 				});
+	}
+
+	async getBoxSetDetail(boxSetId) {
+		return getBoxSetDetailWithChildren(boxSetId);
 	}
 
 	async getMovies(movieLibraryId, startIndex, pageSize) {

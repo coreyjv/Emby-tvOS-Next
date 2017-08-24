@@ -38,10 +38,6 @@ export default class AllMoviesController extends DocumentController {
 	}
 
 	async handleNeedsMore(event) {
-		console.log("NEEDS MORE EVENT", event);
-		console.log("NEEDS MORE THIS", this);
-		console.log("NEEDS MORE THIS ID ", this.Id);
-
 		const nextPageOfMovies = await EmbyService.getMovies(this.Id, this.grid.page * this.pageSize, this.pageSize);
 		const newMoviesViewModel = new AllMoviesViewModel(nextPageOfMovies);
 

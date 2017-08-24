@@ -1,4 +1,9 @@
 import ImageUrlProvider from './ImageUrlProvider';
+import InternationalData from '../InternationalData';
+
+function _getCriticBadgeUrl(criticRating) {
+	return criticRating ? criticRating > 60 ? "resource://tomato-fresh" : "resource://tomato-splat" : "";
+}
 
 const strategies = {
 	"library": (item) => {
@@ -25,8 +30,39 @@ const strategies = {
 		}
 
 		if ( item.UserData && item.UserData.Played === true ) {
-			movieItem.playedUrl = "resource://button-checkmark";
+			movieItem.playedUrl = "resource://overlay-checkmark";
 		}
+
+		//TODO Start consolidate with movie detail view
+		if ( item.Overview ) {
+			movieItem.description = item.Overview;
+		}
+
+		if ( item.Genres ) {
+			movieItem.genres = item.Genres.join(' / ');
+		}
+
+		if ( item.CriticRating ) {
+			movieItem.criticRating = item.CriticRating;
+			movieItem.criticBadgeUrl = _getCriticBadgeUrl(item.CriticRating);
+		}
+
+		if(item.RunTimeTicks) {
+			movieItem.runtime = `${Math.floor(item.RunTimeTicks/600000000)} ${InternationalData[Settings.language].messages.mins}`;
+		}
+
+		if(item.OfficialRating) {
+			movieItem.ratingBadgeUrl = `resource://mpaa-${item.OfficialRating.toLowerCase().replace('-','')}`;
+		}
+
+		if(item.HasSubtitles === true) {
+			movieItem.subtitlesBadgeUrl = 'resource://cc';
+		}
+
+		if(item.IsHD === true) {
+			movieItem.hdBadgeUrl = 'resource://hd';
+		}
+		//TODO End consolidate movie detail view
 
 		return movieItem;
 	}, "BoxSet": (item) => {
@@ -35,7 +71,7 @@ const strategies = {
 		boxSetItem.subtitle = item.OfficialRating;
 		boxSetItem.url = ImageUrlProvider.getUrl(item.Id, { type: "Primary", imageTag: item.ImageTags.Primary, itemId: item.Id});
 		boxSetItem.route = `movies/BoxSetDetail`;
-		boxSetItem.routeParams = JSON.stringify(boxSetItem);
+		boxSetItem.routeParams = JSON.stringify(Object.assign({}, boxSetItem, { Id: item.Id }));
 
 		//TODO Add number of movies as badge item
 		return boxSetItem;
@@ -60,7 +96,7 @@ const strategies = {
 		}
 
 		if ( item.UserData && item.UserData.Played === true ) {
-			episodeItem.playedUrl = "resource://button-checkmark";
+			episodeItem.playedUrl = "resource://overlay-checkmark";
 		}
 
 		return episodeItem;
@@ -76,7 +112,7 @@ const strategies = {
 		}
 
 		if ( item.UserData && item.UserData.Played === true ) {
-			videoItem.playedUrl = "resource://button-checkmark";
+			videoItem.playedUrl = "resource://overlay-checkmark";
 		}
 
 		return videoItem;

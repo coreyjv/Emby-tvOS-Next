@@ -11,11 +11,17 @@ export default {
 			scenes: "Scenes",
 			mins: "mins",
 			play: "Play",
+			playAll: "Play All",
+			shuffle: "Shuffle",
 			watched: "Watched",
 			favorite: "Favorite",
 			delete: "Delete",
+			items: "{itemCount, plural, one{# item} other{# items}}",
 			allmovies: {
 				allmovies: "All Movies",
+			},
+			boxsetdetail: {
+				movies: "Movies"
 			},
 			moviedetail: {
 				director: "Directed By",
