@@ -9,7 +9,7 @@ export default class MenuBarController extends DocumentController {
 			const menuBarDocument = this._documentLoader.fetchDocument({ template: template, context: data });
 			const menuBarElem = menuBarDocument.getElementsByTagName("menuBar").item(0);
 			menuBarElem.addEventListener("select", (event) => {
-				this.selectMenuItem(event.target);
+				this.selectMenuItem(event.target, false, routeParams);
 			});
 
 			// Pre-load the document for the initial focused menu item or first item,

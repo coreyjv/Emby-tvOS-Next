@@ -17,7 +17,6 @@ export default class AllMoviesController extends DocumentController {
 	}
 
 	async fetchData(routeParams) {
-		console.log("ROUTE PARAMS", routeParams);
 		const movies = await EmbyService.getMovies(routeParams.Id, 0, this.pageSize);
 		this.allMoviesViewModel = new AllMoviesViewModel(movies);
 		return Promise.resolve({});

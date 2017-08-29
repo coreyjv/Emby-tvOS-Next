@@ -7,6 +7,8 @@ export default class DocumentController {
 	constructor(documentLoader, template, loadingDocument, routeParams) {
 		this.handlePlay = this.handlePlay.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
+		this.handleHighlight = this.handleHighlight.bind(this);
+		this.handleHoldSelect = this.handleHoldSelect.bind(this);
 		this._documentLoader = documentLoader;
 		this._loadingDocument = loadingDocument;
 		this.fetchDocument(template, routeParams);
@@ -32,6 +34,8 @@ export default class DocumentController {
 	setupDocument(document) {
 		document.addEventListener("select", this.handleSelect);
 		document.addEventListener("play", this.handlePlay);
+		document.addEventListener("highlight", this.handleHighlight);
+		document.addEventListener("holdselect", this.handleHoldSelect);
 	}
 
 	handleDocument(document, loadingDocument) {
@@ -63,5 +67,13 @@ export default class DocumentController {
 
 	handlePlay(event) {
 
+	}
+
+	handleHighlight(event) {
+
+	}
+
+	handleHoldSelect(event) {
+		console.log("EVENT", event);
 	}
 }

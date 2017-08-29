@@ -13,6 +13,10 @@ export default class MoviesMenuBarController extends MenuBarController {
 				route: "movies/AllMovies",
 				autoHighlight: true,
 				title: "messages.moviesMenuBar.all"
+			}, {
+				route: "movies/Genres",
+				autoHighlight: false,
+				title: "messages.moviesMenuBar.genres"
 			}]
 		});
 	}

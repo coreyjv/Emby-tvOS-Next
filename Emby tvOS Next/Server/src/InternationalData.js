@@ -20,6 +20,9 @@ export default {
 			allmovies: {
 				allmovies: "All Movies",
 			},
+			genres: {
+				genres: "Genres"
+			},
 			boxsetdetail: {
 				movies: "Movies"
 			},
@@ -39,7 +42,8 @@ export default {
 				settings: "Settings"
 			},
 			moviesMenuBar: {
-				all: "All"
+				all: "All",
+				genres: "Genres"
 			},
 			settings: {
 				aboutEmby: {

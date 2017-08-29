@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+	<head>
+		<style>{{> styles}}</style>
+	</head>
+	<catalogTemplate>
+		<banner>
+				<title>{{formatMessage (intlGet "messages.genres.genres")}}</title>
+		</banner>
+		<list>
+			<section>
+				<!-- Cannot use binding here because <decorationLabel /> is not supported -->
+				{{#each genres.genres}}
+				<listItemLockup itemID="{{identifier}}">
+					<title>{{title}}</title>
+					<decorationLabel>{{decorationLabel}}</decorationLabel>
+					<relatedContent>
+						<grid>
+							<prototypes>
+							{{> moviePrototype}}
+							</prototypes>
+							<section binding="items:{movies};" />
+						</grid>
+					</relatedContent>
+				</listItemLockup>
+				{{/each}}
+			</section>
+		</list>
+	</catalogTemplate>
+</document>

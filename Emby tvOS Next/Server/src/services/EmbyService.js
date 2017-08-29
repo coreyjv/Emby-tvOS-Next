@@ -151,6 +151,44 @@ async function getMovies(movieLibraryId, startIndex, pageSize) {
 	return movies.Items;
 }
 
+async function getMovieGenres(movieLibraryId) {
+	console.log("Attempting to retrieve genres for movie library with id", movieLibraryId);
+
+	const genres = await apiClient.getGenres(currentUserId, {
+		parentId: movieLibraryId,
+		includeItemTypes: ["Movie"],
+		recursive: true,
+		SortBy: 'SortName',
+		SortOrder: 'Ascending', 
+		EnableTotalRecordCount: false
+	});
+
+	console.log("Retrieve genres", genres);
+
+	return genres.Items;
+}
+
+async function getMoviesByGenre(movieLibraryId, genreId, startIndex, pageSize) {
+	console.log("Attempting to retrieve movies from library with id and in genre with Id, startIndex and pageSize", movieLibraryId, genreId, startIndex, pageSize);
+
+	const movies = await apiClient.getItems(currentUserId, {
+		parentId: movieLibraryId,
+		GenreIds: [genreId],
+		fields: "PrimaryImageAspectRatio,ParentId",
+		includeItemTypes: ["Movie"],
+		startIndex: startIndex,
+		limit: pageSize,
+		recursive: true,
+		SortBy: 'SortName',
+		SortOrder: 'Ascending', 
+		EnableTotalRecordCount: false
+	});
+
+	console.log("Retrieved movies", movies);
+
+	return movies.Items;
+}
+
 async function getBoxSetChildren(boxSetId) {
 	console.log("Attempting to retrieve boxset children with boxset id", boxSetId);
 
@@ -210,6 +248,14 @@ class EmbyService {
 
 	async getBoxSetDetail(boxSetId) {
 		return getBoxSetDetailWithChildren(boxSetId);
+	}
+
+	async getMovieGenres(movieLibraryId) {
+		return getMovieGenres(movieLibraryId);
+	}
+
+	async getMoviesByGenre(movieLibraryId, genreId, startIndex, pageSize) {
+		return getMoviesByGenre(movieLibraryId, genreId, startIndex, pageSize);
 	}
 
 	async getMovies(movieLibraryId, startIndex, pageSize) {

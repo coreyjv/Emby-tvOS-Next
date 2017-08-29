@@ -73,7 +73,10 @@ const strategies = {
 		boxSetItem.route = `movies/BoxSetDetail`;
 		boxSetItem.routeParams = JSON.stringify(Object.assign({}, boxSetItem, { Id: item.Id }));
 
-		//TODO Add number of movies as badge item
+		if ( item.UserData && item.UserData.Played === true ) {
+			boxSetItem.playedUrl = "resource://overlay-checkmark";
+		}
+
 		return boxSetItem;
 	}, "Episode": (item) => {
 		let episodeItem = new DataItem("Episode", item.Id);
@@ -139,6 +142,13 @@ const strategies = {
 		//sceneItem.route = "people/PersonDetail";
 		//sceneItem.routeParams = JSON.stringify(Object.assign({}, personItem, { Id: item.Id }));
 		return sceneItem;
+	}, "Genre": (item) => {
+		let genreItem = new DataItem("Genre", item.Id);
+		genreItem.title = item.Name;
+		genreItem.decorationLabel = item.MovieCount;
+		genreItem.movieCount = genreItem.decorationLabel;
+
+		return genreItem;
 	}
 };
 

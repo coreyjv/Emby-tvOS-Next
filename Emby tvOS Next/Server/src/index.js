@@ -8,6 +8,7 @@ import MoviesMenuBarController from './movies/MoviesMenuBarController';
 import AllMoviesController from './movies/AllMoviesController';
 import MovieDetailController from './movies/MovieDetailController';
 import BoxSetDetailController from './movies/BoxSetDetailController';
+import GenresController from './movies/GenresController';
 import HandlebarsPartials from './HandlebarsPartials';
 /* eslint-enable no-unused-vars */
 
