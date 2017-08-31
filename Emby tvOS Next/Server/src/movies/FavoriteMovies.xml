@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+	<head>
+		<style>{{> styles}}</style>
+	</head>
+		<stackTemplate>
+				<banner>
+						<title>{{formatMessage (intlGet "messages.favoritemovies.favoritemovies")}}</title>
+				</banner>
+				<collectionList>
+						<grid>
+								<prototypes>
+								{{> moviePrototype}}
+								</prototypes>
+								<section binding="items:{movies};" />
+						</grid>
+				</collectionList>
+		</stackTemplate>
+</document>

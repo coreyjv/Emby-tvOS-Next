@@ -151,6 +151,27 @@ async function getMovies(movieLibraryId, startIndex, pageSize) {
 	return movies.Items;
 }
 
+async function getFavoriteMovies(movieLibraryId, startIndex, pageSize) {
+	console.log("Attempting to retrieve favorite movies from library with id, startIndex and pageSize", movieLibraryId, startIndex, pageSize);
+
+	const movies = await apiClient.getItems(currentUserId, {
+		parentId: movieLibraryId,
+		fields: "PrimaryImageAspectRatio,ParentId",
+		includeItemTypes: ["Movie"],
+		startIndex: startIndex,
+		limit: pageSize,
+		recursive: true,
+		SortBy: 'SortName',
+		SortOrder: 'Ascending', 
+		IsFavorite: true,
+		EnableTotalRecordCount: false
+	});
+
+	console.log("Retrieved favorite movies", movies);
+
+	return movies.Items;
+}
+
 async function getMovieGenres(movieLibraryId) {
 	console.log("Attempting to retrieve genres for movie library with id", movieLibraryId);
 
@@ -260,6 +281,10 @@ class EmbyService {
 
 	async getMovies(movieLibraryId, startIndex, pageSize) {
 		return getMovies(movieLibraryId, startIndex, pageSize);
+	}
+
+	async getFavoriteMovies(movieLibraryId, startIndex, pageSize) {
+		return getFavoriteMovies(movieLibraryId, startIndex, pageSize);
 	}
 
 	async getHome(userId) {

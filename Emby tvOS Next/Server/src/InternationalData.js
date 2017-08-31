@@ -20,6 +20,9 @@ export default {
 			allmovies: {
 				allmovies: "All Movies",
 			},
+			favoritemovies: {
+				favoritemovies: "Favorite Movies",
+			},
 			genres: {
 				genres: "Genres"
 			},
@@ -43,6 +46,7 @@ export default {
 			},
 			moviesMenuBar: {
 				all: "All",
+				favorites: "Favorites",
 				genres: "Genres"
 			},
 			settings: {
