@@ -19,13 +19,21 @@ export default class AllMoviesController extends DocumentController {
 	async fetchData(routeParams) {
 		const movies = await EmbyService.getMovies(routeParams.Id, 0, this.pageSize);
 		this.allMoviesViewModel = new AllMoviesViewModel(movies);
+
+		if ( movies.length === 0 ) {
+			this.noMovies = true;
+			return Promise.resolve({ data: { title: "messages.allmovies.noAllMoviesTitle" }, templateOverride: "templates/DescriptiveAlert" });
+		}
+
 		return Promise.resolve({});
 	}
 
 	setupDocument(document) {
 		super.setupDocument(document);
 
-		document.getElementsByTagName("stackTemplate").item(0).addEventListener("needsmore", this.handleNeedsMore);
+		if ( !this.noMovies ) {
+			document.getElementsByTagName("stackTemplate").item(0).addEventListener("needsmore", this.handleNeedsMore);
+		}
 	}
 
 	bindData(document) {

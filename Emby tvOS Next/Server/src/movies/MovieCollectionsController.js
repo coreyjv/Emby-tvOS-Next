@@ -20,13 +20,21 @@ export default class MovieCollectionsController extends DocumentController {
 		console.log("THIS PAGE SIZE", this.pageSize);
 		const movieCollections = await EmbyService.getMovieCollections(routeParams.Id, 0, this.pageSize);
 		this.movieCollectionsViewModel = new MovieCollectionsViewModel(movieCollections);
+
+		if ( movieCollections.length === 0 ) {
+			this.noCollections = true;
+			return Promise.resolve({ data: { title: "messages.movieCollections.noMovieCollectionsTitle" }, templateOverride: "templates/DescriptiveAlert" });
+		}
+
 		return Promise.resolve({});
 	}
 
 	setupDocument(document) {
 		super.setupDocument(document);
 
-		document.getElementsByTagName("stackTemplate").item(0).addEventListener("needsmore", this.handleNeedsMore);
+		if ( !this.noCollections ) {
+			document.getElementsByTagName("stackTemplate").item(0).addEventListener("needsmore", this.handleNeedsMore);
+		}
 	}
 
 	bindData(document) {

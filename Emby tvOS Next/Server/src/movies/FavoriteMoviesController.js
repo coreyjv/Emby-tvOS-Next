@@ -17,16 +17,23 @@ export default class FavoriteMoviesController extends DocumentController {
 	}
 
 	async fetchData(routeParams) {
-		console.log("THIS PAGE SIZE", this.pageSize);
 		const movies = await EmbyService.getFavoriteMovies(routeParams.Id, 0, this.pageSize);
 		this.favoriteMoviesViewModel = new FavoriteMoviesViewModel(movies);
+
+		if ( movies.length === 0 ) {
+			this.noFavorites = true;
+			return Promise.resolve({ data: { title: "messages.favoritemovies.noFavoriteMoviesTitle" }, templateOverride: "templates/DescriptiveAlert" });
+		}
+
 		return Promise.resolve({});
 	}
 
 	setupDocument(document) {
 		super.setupDocument(document);
 
-		document.getElementsByTagName("stackTemplate").item(0).addEventListener("needsmore", this.handleNeedsMore);
+		if ( !this.noFavorites ) {
+			document.getElementsByTagName("stackTemplate").item(0).addEventListener("needsmore", this.handleNeedsMore);
+		}
 	}
 
 	bindData(document) {

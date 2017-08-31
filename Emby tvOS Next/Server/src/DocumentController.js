@@ -15,8 +15,14 @@ export default class DocumentController {
 	}
 
 	fetchDocument(template, routeParams) {
-		this.fetchData(routeParams).then(data => {
-			this._document = this._documentLoader.fetchDocument({template: template, context: data});
+		this.fetchData(routeParams).then(({ data, templateOverride }) => {
+			if ( templateOverride ) {
+				console.log("Overriding default template with the following", template, templateOverride);
+				this._document = this._documentLoader.fetchDocument({template: templateOverride, context: data});
+			} else {
+				this._document = this._documentLoader.fetchDocument({template: template, context: data});
+			}
+			
 
 			// Add the event listener for document
 			this.setupDocument(this._document);
@@ -61,7 +67,7 @@ export default class DocumentController {
 		if (!routeHandled) {
 			console.log("Action wasn't routed");
 			console.log("The select event most likely needs to be handled for target", target);
-			// Push Descriptibe alert template?
+			// Push Descriptive alert template?
 		}
 	}
 

@@ -5,7 +5,7 @@
 	</head>
 		<stackTemplate>
 				<banner>
-						<title>{{formatMessage (intlGet "messages.collections.collections")}}</title>
+						<title>{{formatMessage (intlGet "messages.movieCollections.movieCollections")}}</title>
 				</banner>
 				<collectionList>
 						<grid>

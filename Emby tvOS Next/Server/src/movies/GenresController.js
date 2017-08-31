@@ -53,16 +53,17 @@ export default class GenresController extends DocumentController {
 	async fetchData(routeParams) {
 		const genres = await EmbyService.getMovieGenres(routeParams.Id);
 		this.genresViewModel = new GenresViewModel(genres);
-		console.log("Genres view model", this.genresViewModel);
-		return Promise.resolve(this.genresViewModel);
+
+		if ( genres.length === 0 ) {
+			this.noGenres = true;
+			return Promise.resolve({ data: { title: "messages.genres.noGenresTitle" }, templateOverride: "templates/DescriptiveAlert" });
+		}
+
+		return Promise.resolve({data: this.genresViewModel});
 	}
 
 	setupDocument(document) {
 		super.setupDocument(document);
-
-		document.getElementsByTagName("catalogTemplate").item(0).addEventListener("needsmore", (event) => {
-					console.log("NEED MORE FOR GENRE", event);
-				});
 	}
 
 	bindData(document) {
@@ -71,7 +72,6 @@ export default class GenresController extends DocumentController {
 			emptyDataItem.movies = [];
 			section.dataItem = emptyDataItem;
 		});
-
 	}
 
 
@@ -85,24 +85,8 @@ export default class GenresController extends DocumentController {
 				const moviesSection = event.target.getElementsByTagName("section").item(0);
 				moviesSection.dataItem = movies.moviesGrid;
 				moviesSection.addEventListener("highlight", needMoreEventListener(this.Id, genreId, moviesSection, movies.movieCount, 0, pageSize, EmbyService));
-				// moviesSection.addEventListener("highlight", (event) => {
-				// 	console.log("NEED MORE FOR GENRE", genreId);
-
-				// 	const index = event.target.parentNode.dataItem.movies.indexOf(event.target.dataItem);
-				// 	console.log("CURRENT INDEX", index);
-				// 	if ( index > (numberLoaded - (pageSize * needsMoreThreshold)) ) {
-				// 		console.log("NEED TO LOAD MORE")
-				// 	} else {
-				// 		console.log("DO NOT NEED TO LOAD MORE");
-				// 	}
-				// });
 
 				this.loadedGenres.push(genreId);
-				// Get Movies by genre
-				// Create elements
-				// Append
-				// Do we need to setup manual paging?
-				// this.allMoviesViewModel = new AllMoviesViewModel(movies);
 			}
 		}
 	}
@@ -114,15 +98,6 @@ export default class GenresController extends DocumentController {
 	needToLoadGenre(highlightedGenre) {
 		return !this.loadedGenres.includes(highlightedGenre);
 	}
-
-	// async handleNeedsMore(event) {
-	// 	const nextPageOfMovies = await EmbyService.getMovies(this.Id, this.grid.page * this.pageSize, this.pageSize);
-	// 	const newMoviesViewModel = new AllMoviesViewModel(nextPageOfMovies);
-
-	// 	this.moviesSection.dataItem.movies = this.moviesSection.dataItem.movies.concat(newMoviesViewModel.moviesGrid.movies);
-	// 	this.moviesSection.dataItem.touchPropertyPath("movies");
-	// 	this.grid.page += 1;
-	// }
 }
 
 Router.registerController(GenresController);

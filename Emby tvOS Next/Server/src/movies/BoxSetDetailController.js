@@ -16,7 +16,7 @@ export default class BoxSetDetailController extends DocumentController {
 		console.log("ROUTE PARAMS", routeParams);
 		const boxSet = await EmbyService.getBoxSetDetail(routeParams.Id);
 		this.boxSetDetailViewModel = new BoxSetDetailViewModel(boxSet);
-		return Promise.resolve(this.boxSetDetailViewModel);
+		return Promise.resolve({ data: this.boxSetDetailViewModel });
 	}
 
 	bindData(document) {

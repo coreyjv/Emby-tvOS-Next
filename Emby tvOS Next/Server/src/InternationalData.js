@@ -19,15 +19,19 @@ export default {
 			items: "{itemCount, plural, one{# item} other{# items}}",
 			allmovies: {
 				allmovies: "All Movies",
+				noAllMoviesTitle: "No movies found"
 			},
 			favoritemovies: {
 				favoritemovies: "Favorite Movies",
+				noFavoriteMoviesTitle: "No favorite movies found"
 			},
 			genres: {
-				genres: "Genres"
+				genres: "Genres",
+				noGenresTitle: "No genres found"
 			},
-			collections: {
-				collections: "Movie Collections"
+			movieCollections: {
+				movieCollections: "Movie Collections",
+				noMovieCollectionsTitle: "No movie collections found"
 			},
 			boxsetdetail: {
 				movies: "Movies"

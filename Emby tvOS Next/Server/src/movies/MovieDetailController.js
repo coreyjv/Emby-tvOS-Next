@@ -16,7 +16,7 @@ export default class MovieDetailController extends DocumentController {
 		console.log("ROUTE PARAMS", routeParams);
 		const movie = await EmbyService.getMovieDetail(routeParams.Id);
 		this.movieDetailViewModel = new MovieDetailViewModel(movie);
-		return Promise.resolve(this.movieDetailViewModel);
+		return Promise.resolve({ data: this.movieDetailViewModel });
 	}
 
 	bindData(document) {
