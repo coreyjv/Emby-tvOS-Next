@@ -172,6 +172,26 @@ async function getFavoriteMovies(movieLibraryId, startIndex, pageSize) {
 	return movies.Items;
 }
 
+async function getMovieCollections(movieLibraryId, startIndex, pageSize) {
+	console.log("Attempting to retrieve movie collectionsfrom library with id, startIndex and pageSize", movieLibraryId, startIndex, pageSize);
+
+	const movieCollections = await apiClient.getItems(currentUserId, {
+		fields: "PrimaryImageAspectRatio,ParentId",
+		includeItemTypes: ["BoxSet"],
+		startIndex: startIndex,
+		limit: pageSize,
+		recursive: true,
+		SortBy: 'SortName',
+		SortOrder: 'Ascending', 
+		EnableTotalRecordCount: false
+	});
+
+	console.log("Retrieved movie collections", movieCollections);
+
+	return movieCollections.Items;
+}
+
+
 async function getMovieGenres(movieLibraryId) {
 	console.log("Attempting to retrieve genres for movie library with id", movieLibraryId);
 
@@ -286,6 +306,11 @@ class EmbyService {
 	async getFavoriteMovies(movieLibraryId, startIndex, pageSize) {
 		return getFavoriteMovies(movieLibraryId, startIndex, pageSize);
 	}
+
+	async getMovieCollections(movieLibraryId, startIndex, pageSize) {
+		return getMovieCollections(movieLibraryId, startIndex, pageSize);
+	}
+
 
 	async getHome(userId) {
 		return Promise.all([getUserConfiguration(currentUserId), 

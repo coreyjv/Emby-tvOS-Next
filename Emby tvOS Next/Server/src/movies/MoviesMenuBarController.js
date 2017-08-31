@@ -18,6 +18,10 @@ export default class MoviesMenuBarController extends MenuBarController {
 				autoHighlight: false,
 				title: "messages.moviesMenuBar.favorites"
 			}, {
+				route: "movies/MovieCollections",
+				autoHighlight: false,
+				title: "messages.moviesMenuBar.collections"
+			},{
 				route: "movies/Genres",
 				autoHighlight: false,
 				title: "messages.moviesMenuBar.genres"

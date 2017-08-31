@@ -10,6 +10,7 @@ import MovieDetailController from './movies/MovieDetailController';
 import BoxSetDetailController from './movies/BoxSetDetailController';
 import GenresController from './movies/GenresController';
 import FavoriteMoviesController from './movies/FavoriteMoviesController';
+import MovieCollectionsController from './movies/MovieCollectionsController';
 import HandlebarsPartials from './HandlebarsPartials';
 /* eslint-enable no-unused-vars */
 

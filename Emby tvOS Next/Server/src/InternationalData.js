@@ -26,6 +26,9 @@ export default {
 			genres: {
 				genres: "Genres"
 			},
+			collections: {
+				collections: "Movie Collections"
+			},
 			boxsetdetail: {
 				movies: "Movies"
 			},
@@ -46,6 +49,7 @@ export default {
 			},
 			moviesMenuBar: {
 				all: "All",
+				collections: "Collections",
 				favorites: "Favorites",
 				genres: "Genres"
 			},
