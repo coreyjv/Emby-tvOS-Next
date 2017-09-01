@@ -6,6 +6,17 @@
 		<stackTemplate>
 				<banner>
 						<title>{{formatMessage (intlGet "messages.allmovies.allmovies")}}</title>
+				<row style="tv-align: center; margin: 40 0 10 0">
+					<!-- <button>
+						<text>{{formatMessage (intlGet "messages.selectView")}}</text>
+					</button> -->
+					<button id="sortBy" style="margin: 20">
+						<text>{{formatMessage (intlGet "messages.sort.sortBy")}}: {{formatMessage (intlGet this.sortBy)}} {{sortOrder}}</text>
+					</button>
+					<!-- <button>
+						<text>{{formatMessage (intlGet "messages.filter")}}</text>
+					</button> -->
+				</row>
 				</banner>
 				<collectionList>
 						<grid>

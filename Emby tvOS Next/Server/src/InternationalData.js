@@ -1,4 +1,4 @@
-export default {
+const messages = {
 	en: {
 		locales: ['en-US'],
 		messages: {
@@ -16,6 +16,27 @@ export default {
 			watched: "Watched",
 			favorite: "Favorite",
 			delete: "Delete",
+			selectView: "Select View",
+			sort: { 
+				sortBy: "Sort By",
+				sortOrder: "Sort Order",
+				Ascending: "Ascending",
+				Descending: "Descending",
+				SortName: "Name",
+				CriticRating: "Critic Rating",
+				Budget: "Budget",
+				CommunityRating: "IMDb Rating",
+				CriticRating: "Critic Rating",
+				DateCreated: "Date Added",
+				DatePlayed: "Date Played",
+				Metascore: "Metascore",
+				OfficialRating: "Parental Rating",
+				PlayCount: "Play Count",
+				PremiereDate: "Release Date",
+				Revenue: "Revenue",
+				Runtime: "Runtime"
+			},
+			filter: "Filter",
 			items: "{itemCount, plural, one{# item} other{# items}}",
 			allmovies: {
 				allmovies: "All Movies",
@@ -131,3 +152,13 @@ export default {
 		}
 	}
 };
+
+function ref(obj, str) {
+    return str.split(".").reduce(function(o, x) { return o[x] }, obj);
+}
+
+export function getString(key) {
+	return ref(messages[Settings.language], key);
+}
+
+export default messages;

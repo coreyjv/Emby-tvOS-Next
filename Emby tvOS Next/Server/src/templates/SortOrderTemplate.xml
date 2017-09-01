@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+	<alertTemplate>
+		<title>{{formatMessage (intlGet "messages.sort.sortOrder")}}</title>
+		{{#each sortOrderOptions}}
+			{{#if currentSelection}}
+			<button sortOrder="{{sortOrder}}" autoHighlight="true">
+			{{else}}
+			<button sortOrder="{{sortOrder}}">
+			{{/if}}
+				<text>{{formatMessage (intlGet this.sortOrderTitle)}}</text>
+				{{#if currentSelection}}
+				<badge src="resource://button-checkmark" style="margin:0 20 0;" />
+				{{/if}}
+			</button>
+		{{/each}}
+	</alertTemplate>
+</document>

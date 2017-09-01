@@ -4,13 +4,14 @@ import {createDescriptiveAlertDocument} from './utils';
 
 export default class DocumentController {
 
-	constructor(documentLoader, template, loadingDocument, routeParams) {
+	constructor(documentLoader, template, loadingDocument, routeParams, data) {
 		this.handlePlay = this.handlePlay.bind(this);
 		this.handleSelect = this.handleSelect.bind(this);
 		this.handleHighlight = this.handleHighlight.bind(this);
 		this.handleHoldSelect = this.handleHoldSelect.bind(this);
 		this._documentLoader = documentLoader;
 		this._loadingDocument = loadingDocument;
+		this._data = data;
 		this.fetchDocument(template, routeParams);
 	}
 

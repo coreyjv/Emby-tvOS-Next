@@ -131,8 +131,8 @@ async function getUserConfiguration(userId) {
 	return user.Configuration;
 }
 
-async function getMovies(movieLibraryId, startIndex, pageSize) {
-	console.log("Attempting to retrieve movies from library with id, startIndex and pageSize", movieLibraryId, startIndex, pageSize);
+async function getMovies(movieLibraryId, sortBy, sortOrder, startIndex, pageSize) {
+	console.log("Attempting to retrieve movies from library with id, sorted by, ordered by with startIndex and pageSize", movieLibraryId, sortBy, sortOrder, startIndex, pageSize);
 
 	const movies = await apiClient.getItems(currentUserId, {
 		parentId: movieLibraryId,
@@ -141,8 +141,8 @@ async function getMovies(movieLibraryId, startIndex, pageSize) {
 		startIndex: startIndex,
 		limit: pageSize,
 		recursive: true,
-		SortBy: 'SortName',
-		SortOrder: 'Ascending', 
+		SortBy: sortBy,
+		SortOrder: sortOrder, 
 		EnableTotalRecordCount: false
 	});
 
@@ -299,8 +299,8 @@ class EmbyService {
 		return getMoviesByGenre(movieLibraryId, genreId, startIndex, pageSize);
 	}
 
-	async getMovies(movieLibraryId, startIndex, pageSize) {
-		return getMovies(movieLibraryId, startIndex, pageSize);
+	async getMovies(movieLibraryId, sortBy, sortOrder, startIndex, pageSize) {
+		return getMovies(movieLibraryId, sortBy, sortOrder, startIndex, pageSize);
 	}
 
 	async getFavoriteMovies(movieLibraryId, startIndex, pageSize) {

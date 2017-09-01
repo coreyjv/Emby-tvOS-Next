@@ -3,13 +3,14 @@ import DocumentController from '../DocumentController';
 import EmbyService from '../services/EmbyService';
 import FavoriteMoviesViewModel from './FavoriteMoviesViewModel';
 
+const pageSize = 100;
+
 export default class FavoriteMoviesController extends DocumentController {
 	constructor(documentLoader, template, loadingDocument, routeParams) {
 		super(documentLoader, template, loadingDocument, routeParams);
 
 		this.Id = routeParams.Id;
 		this.handleNeedsMore = this.handleNeedsMore.bind(this);
-		this.pageSize = 100;
 	}
 
 	static handlesRoute(route) {
@@ -17,7 +18,7 @@ export default class FavoriteMoviesController extends DocumentController {
 	}
 
 	async fetchData(routeParams) {
-		const movies = await EmbyService.getFavoriteMovies(routeParams.Id, 0, this.pageSize);
+		const movies = await EmbyService.getFavoriteMovies(routeParams.Id, 0, pageSize);
 		this.favoriteMoviesViewModel = new FavoriteMoviesViewModel(movies);
 
 		if ( movies.length === 0 ) {
@@ -45,7 +46,7 @@ export default class FavoriteMoviesController extends DocumentController {
 	}
 
 	async handleNeedsMore(event) {
-		const nextPageOfMovies = await EmbyService.getFavoriteMovies(this.Id, this.grid.page * this.pageSize, this.pageSize);
+		const nextPageOfMovies = await EmbyService.getFavoriteMovies(this.Id, this.grid.page * pageSize, pageSize);
 		const newMoviesViewModel = new FavoriteMoviesViewModel(nextPageOfMovies);
 
 		this.moviesSection.dataItem.movies = this.moviesSection.dataItem.movies.concat(newMoviesViewModel.moviesGrid.movies);
