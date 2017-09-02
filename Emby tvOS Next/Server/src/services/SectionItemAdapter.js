@@ -18,12 +18,13 @@ const strategies = {
 
 		return libraryItem;
 	}, "Movie": (item) => {
-		let movieItem = new DataItem("Movie", item.Id);
+		const itemId = item.Id ? item.Id : item.ItemId;
+		let movieItem = new DataItem("Movie", itemId);
 		movieItem.title = item.Name;
-		movieItem.subtitle = `${item.OfficialRating} (${item.ProductionYear.toString()})`;
-		movieItem.url = ImageUrlProvider.getUrl(item.Id, { type: "Primary", imageTag: item.ImageTags.Primary, itemId: item.Id});
+		movieItem.subtitle = item.OfficialRating ? `${item.OfficialRating} (${item.ProductionYear.toString()})` : item.ProductionYear.toString();
+		movieItem.url = ImageUrlProvider.getUrl(itemId, { type: "Primary", imageTag: item.ImageTags && item.ImageTags.Primary ? item.ImageTags.Primary: item.PrimaryImageTag, itemId: itemId});
 		movieItem.route = `movies/MovieDetail`;
-		movieItem.routeParams = JSON.stringify(Object.assign({}, movieItem, { Id: item.Id }));
+		movieItem.routeParams = JSON.stringify(Object.assign({}, movieItem, { Id: itemId }));
 
 		if ( item.UserData && item.UserData.PlayedPercentage ) {
 			movieItem.progress = (item.UserData.PlayedPercentage/100).toString();

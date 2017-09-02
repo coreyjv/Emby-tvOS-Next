@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<document>
+	<head>
+		<style>
+			{{> styles}}
+			.centered-title {
+				tv-text-style: title2;
+				width: 1920;
+			}
+		</style>
+	</head>
+	<searchTemplate>
+		<searchField></searchField>
+		<collectionList>
+		<shelf>
+			<header>
+				<title id="searchMoviesTitle" binding="textContent:{title};"/>
+			</header>
+			<prototypes>
+			{{> moviePrototype}}
+			</prototypes>
+			<section binding="items:{movies};" />
+		</shelf>
+		</collectionList>
+	</searchTemplate>
+</document>

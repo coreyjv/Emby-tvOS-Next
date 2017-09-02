@@ -57,6 +57,11 @@ const messages = {
 			boxsetdetail: {
 				movies: "Movies"
 			},
+			movieSearch: {
+				movies: "Movies",
+				movieSearch: "Search for movies",
+				noMovies: "No movies found"
+			},
 			moviedetail: {
 				director: "Directed By",
 				released: "Released",
@@ -76,7 +81,8 @@ const messages = {
 				all: "All",
 				collections: "Collections",
 				favorites: "Favorites",
-				genres: "Genres"
+				genres: "Genres",
+				search: "Search"
 			},
 			settings: {
 				aboutEmby: {

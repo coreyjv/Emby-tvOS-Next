@@ -10,20 +10,20 @@
 					<!-- <button>
 						<text>{{formatMessage (intlGet "messages.selectView")}}</text>
 					</button> -->
-					<button id="sortBy" style="margin: 20">
-						<text>{{formatMessage (intlGet "messages.sort.sortBy")}}: {{formatMessage (intlGet this.sortBy)}} {{sortOrder}}</text>
+					<button id="sortBy" style="min-width: 127;">
+						<text>{{formatMessage (intlGet this.sortBy)}} {{sortOrder}}</text>
 					</button>
-					<!-- <button>
+					 <!-- <button>
 						<text>{{formatMessage (intlGet "messages.filter")}}</text>
-					</button> -->
+					</button>  -->
 				</row>
 				</banner>
 				<collectionList>
 						<grid>
-								<prototypes>
-								{{> moviePrototype}}
-								</prototypes>
-								<section binding="items:{movies};" />
+							<prototypes>
+							{{> moviePrototype}}
+							</prototypes>
+							<section binding="items:{movies};" />
 						</grid>
 				</collectionList>
 		</stackTemplate>

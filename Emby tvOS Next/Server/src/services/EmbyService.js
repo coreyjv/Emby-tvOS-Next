@@ -173,7 +173,7 @@ async function getFavoriteMovies(movieLibraryId, startIndex, pageSize) {
 }
 
 async function getMovieCollections(movieLibraryId, startIndex, pageSize) {
-	console.log("Attempting to retrieve movie collectionsfrom library with id, startIndex and pageSize", movieLibraryId, startIndex, pageSize);
+	console.log("Attempting to retrieve movie collections from library with id, startIndex and pageSize", movieLibraryId, startIndex, pageSize);
 
 	const movieCollections = await apiClient.getItems(currentUserId, {
 		fields: "PrimaryImageAspectRatio,ParentId",
@@ -191,6 +191,27 @@ async function getMovieCollections(movieLibraryId, startIndex, pageSize) {
 	return movieCollections.Items;
 }
 
+async function findMovieBySearchTerm(movieLibraryId, searchTerm, limit) {
+		console.log("Attempting to search for movies in library with id and term and limit", movieLibraryId, searchTerm, limit);
+
+	const movieSearchResults = await apiClient.getSearchHints({
+		searchTerm: searchTerm,
+		ParentId: movieLibraryId,
+		UserId: currentUserId,
+		Limit: limit,
+		IncludePeople: false,
+		IncludeMedia: true,
+		IncludeGenres: false,
+		IncludeStudios: false,
+		IncludeArtists: false,
+		IncludeItemTypes: 'Movie',
+		EnableTotalRecordCount: false
+	});
+
+	console.log("Retrieved movie search results", movieSearchResults);
+
+	return movieSearchResults.SearchHints;
+}
 
 async function getMovieGenres(movieLibraryId) {
 	console.log("Attempting to retrieve genres for movie library with id", movieLibraryId);
@@ -311,6 +332,9 @@ class EmbyService {
 		return getMovieCollections(movieLibraryId, startIndex, pageSize);
 	}
 
+	async findMovieBySearchTerm(movieLibraryId, searchTerm, limit) {
+		return findMovieBySearchTerm(movieLibraryId, searchTerm, limit);
+	}
 
 	async getHome(userId) {
 		return Promise.all([getUserConfiguration(currentUserId), 

@@ -11,6 +11,7 @@ import BoxSetDetailController from './movies/BoxSetDetailController';
 import GenresController from './movies/GenresController';
 import FavoriteMoviesController from './movies/FavoriteMoviesController';
 import MovieCollectionsController from './movies/MovieCollectionsController';
+import MovieSearchController from './movies/MovieSearchController';
 import HandlebarsPartials from './HandlebarsPartials';
 /* eslint-enable no-unused-vars */
 

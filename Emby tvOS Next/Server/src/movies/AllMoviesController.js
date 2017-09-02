@@ -64,7 +64,7 @@ export default class AllMoviesController extends DocumentController {
 	updateSortByButton(sortBy, sortOrder) {
 		console.log("sortBySortOrder", sortBy, sortOrder);
 		const sortByText = this._document.getElementById("sortBy").getElementsByTagName("text").item(0);
-		sortByText.textContent = `${getString("messages.sort.sortBy")}: ${getString(getMovieSortByTitle(sortBy))} ${sortOrder === 'Ascending' ? '↑' : '↓'}`;
+		sortByText.textContent = `${getString(getMovieSortByTitle(sortBy))} ${sortOrder === 'Ascending' ? '↑' : '↓'}`;
 	}
 
 	async handleSort(sort) {
